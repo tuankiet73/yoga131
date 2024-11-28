@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date (e.g. 17/10/2023)" />
+
+    <EditText
+        android:id="@+id/editTextTeacher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Teacher Name" />
+
+    <EditText
+        android:id="@+id/editTextComments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Additional Comments (optional)" />
+
+    <Button
+        android:id="@+id/buttonAddInstance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Instance" />
+
+    <ListView
+        android:id="@+id/listViewInstances"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

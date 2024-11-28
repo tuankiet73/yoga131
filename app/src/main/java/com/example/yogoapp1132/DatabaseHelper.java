@@ -103,12 +103,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("TEACHER", teacher);
         values.put("COMMENTS", comments);
 
-        db.update("your_table_name", values, "ID = ?", new String[]{String.valueOf(id)});
+        db.update(TABLE_INSTANCES, values, "_id = ?", new String[]{String.valueOf(id)});
         db.close();
     }
 
     public Cursor getAllInstances() {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        return db.rawQuery("SELECT * FROM " + TABLE_INSTANCES, null);
     }
 }

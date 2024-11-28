@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadDataIntoListView() {
         Cursor cursor = myDb.getAllInstances();
-        cursorAdapter = new SimpleCursorAdapter(this,
+        SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,
                 R.layout.list_item_layout,
                 cursor,
                 new String[]{"COURSE_ID", "DATE", "TEACHER"},

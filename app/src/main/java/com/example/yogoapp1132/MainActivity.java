@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper myDb;
     ListView listViewClasses;
     Button buttonAddClass;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +32,35 @@ public class MainActivity extends AppCompatActivity {
         });
 
         displayClasses();
+
+        loadDataIntoListView();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+                int instanceId = cursor.getInt(cursor.getColumnIndex("ID"));
+                String courseId = cursor.getString(cursor.getColumnIndex("COURSE_ID"));
+                String date = cursor.getString(cursor.getColumnIndex("DATE"));
+                String teacher = cursor.getString(cursor.getColumnIndex("TEACHER"));
+                String comments = cursor.getString(cursor.getColumnIndex("COMMENTS"));
+
+                Intent intent = new Intent(MainActivity.this, EditInstanceActivity.class);
+                intent.putExtra("INSTANCE_ID", instanceId);
+                intent.putExtra("COURSE_ID", courseId);
+                intent.putExtra("DATE", date);
+                intent.putExtra("TEACHER", teacher);
+                intent.putExtra("COMMENTS", comments);
+
+                startActivity(intent);
+            }
+        });
     }
 
     private void displayClasses() {
-        Cursor cursor = myDb.getAllData();
+        Cursor cursor = this.myDb.getAllData();
         String[] from = new String[]{DatabaseHelper.COL_2, DatabaseHelper.COL_3, DatabaseHelper.COL_4};
         int[] to = new int[]{R.id.textViewClassDay, R.id.textViewClassTime, R.id.textViewClassCapacity};
 
@@ -48,5 +74,17 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("COURSE_ID", courseId);
             startActivity(intent);
         });
+    }
+
+    private void loadDataIntoListView() {
+        myDb = new DatabaseHelper(this);
+        Cursor cursor = myDb.getAllInstances();
+        cursorAdapter = new SimpleCursorAdapter(this,
+                R.layout.list_item_layout,
+                cursor,
+                new String[]{"COURSE_ID", "DATE", "TEACHER"},
+                new int[]{R.id.courseIdTextView, R.id.dateTextView, R.id.teacherTextView},
+                0);
+        listView.setAdapter(cursorAdapter);
     }
 }

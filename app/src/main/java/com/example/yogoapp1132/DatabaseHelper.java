@@ -94,4 +94,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_INSTANCES + " WHERE COURSE_ID = ?", new String[]{String.valueOf(courseId)});
     }
+
+    public void updateInstance(int id, String courseId, String date, String teacher, String comments) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("COURSE_ID", courseId);
+        values.put("DATE", date);
+        values.put("TEACHER", teacher);
+        values.put("COMMENTS", comments);
+
+        db.update("your_table_name", values, "ID = ?", new String[]{String.valueOf(id)});
+        db.close();
+    }
 }

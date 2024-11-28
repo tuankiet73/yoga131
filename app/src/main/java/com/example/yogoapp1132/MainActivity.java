@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayClasses() {
-        Cursor cursor = this.myDb.getAllData();
+        Cursor cursor = myDb.getAllData();
         String[] from = new String[]{DatabaseHelper.COL_2, DatabaseHelper.COL_3, DatabaseHelper.COL_4};
         int[] to = new int[]{R.id.textViewClassDay, R.id.textViewClassTime, R.id.textViewClassCapacity};
 
@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadDataIntoListView() {
-        myDb = new DatabaseHelper(this);
         Cursor cursor = myDb.getAllInstances();
         cursorAdapter = new SimpleCursorAdapter(this,
                 R.layout.list_item_layout,

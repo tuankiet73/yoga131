@@ -106,4 +106,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.update("your_table_name", values, "ID = ?", new String[]{String.valueOf(id)});
         db.close();
     }
+
+    public Cursor getAllInstances() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+    }
 }
